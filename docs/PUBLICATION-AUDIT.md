@@ -5,33 +5,41 @@ This document records the publication boundary used to move the sanctioned Pytho
 ## Decision classes
 
 ### PUBLIC CONTRACT
-Safe to publish when unchanged from the reviewed private SDK source.
+Approved public interoperability surface in this repository.
 
 - `src/ucii/__init__.py`
 - `src/ucii/_transport.py`
-- `src/ucii/adoption.py`
-- `src/ucii/auth.py`
-- `src/ucii/authorization.py`
 - `src/ucii/client.py`
 - `src/ucii/credentials.py`
 - `src/ucii/errors.py`
 - `src/ucii/identity.py`
 - `src/ucii/participant.py`
-- `src/ucii/peer_auth.py`
-- `src/ucii/peer_trust.py`
-- `src/ucii/policy.py`
-- `src/ucii/provenance.py`
 - `src/ucii/service_entitlement.py`
 - `src/ucii/signing.py`
 - `src/ucii/verification.py`
 - `src/ucii/x402.py`
 - `pyproject.toml`
 
-These files define thin public HTTP client behavior and public data/contracts. They do not contain the UCII server implementation, production secrets, private-key custody material, database access, deployment topology, Mission Control/fleet internals, or private enforcement machinery.
+These files define the publication-approved HTTP client behavior and public
+interoperability contracts. The x402 module is intentionally limited to
+read-only service discovery/metadata and pricing. These files do not contain
+the UCII server implementation, production secrets, private-key custody
+material, database access, deployment topology, Mission Control/fleet
+internals, settlement machinery, or private enforcement machinery.
 
 ### KEEP PRIVATE
-The following categories remain in the private UCII repository and must not be copied here merely because the SDK interoperates with them:
+The following modules and categories remain private unless a future,
+independently justified interoperability requirement establishes a narrower
+public contract. They must not be copied here merely because UCII internally
+uses them or the public SDK interoperates with related service capabilities:
 
+- `auth.py`;
+- `authorization.py`;
+- `policy.py`;
+- `peer_auth.py`;
+- `peer_trust.py`;
+- `adoption.py`;
+- `provenance.py`;
 - server-side authorization/enforcement internals;
 - credential/controller lifecycle implementation internals;
 - private custody and signing implementations;
@@ -47,9 +55,9 @@ The following categories remain in the private UCII repository and must not be c
 - The public client accepts caller-provided `base_url` and optional API token; it does not contain production tokens.
 - The signing boundary is provider-neutral and does not own or persist private keys.
 - Service entitlement exposes only the public proof format and explicitly does not create controller, authorization, revocation, or execution authority.
-- Provenance exposes descriptive event envelopes only; durable storage, retention, append-only persistence, and tamper-evidence implementation remain outside the SDK.
-- x402 exposes public service metadata, pricing, and settlement projections, not private settlement implementation.
-- Delegated-authority methods expose the sanctioned public API surface; server-side authority evaluation and enforcement remain private.
+- Provenance is not part of the current public SDK surface.
+- x402 exposes read-only public service discovery/metadata and pricing only; settlement projections, receipt history, verification, replay protection, adapters, and settlement enforcement machinery remain outside the public SDK.
+- Authorization and delegated-authority SDK machinery are not part of the current public SDK surface; related server-side authority evaluation and enforcement remain private.
 
 ## Publication rule
 

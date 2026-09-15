@@ -1,0 +1,21 @@
+[project]
+name = "ucii-sdk"
+version = "1.0.0"
+description = "Universal Cryptographic Identity Infrastructure Python SDK"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28,<1",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ucii*"]

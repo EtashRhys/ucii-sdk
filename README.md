@@ -2,7 +2,7 @@
 
 The official public Python SDK for Universal Cryptographic Identity Infrastructure (UCII).
 
-The SDK provides a thin developer-facing client boundary over the UCII `/v1/*` API for identity, credentials, authentication, verification, authorization, delegated authority, provenance, service entitlement, and x402 interactions.
+This repository contains a deliberately narrow, developer-facing client boundary for the UCII public API. It is intended to give external developers the minimum interface needed to integrate with UCII without exposing the private UCII server implementation or sensitive internal trust and authority machinery.
 
 ## Install from GitHub
 
@@ -10,49 +10,42 @@ The SDK provides a thin developer-facing client boundary over the UCII `/v1/*` A
 pip install git+https://github.com/EtashRhys/ucii-sdk.git
 ```
 
-## Basic client
+## Current public SDK surface
 
-```python
-from ucii import UCIIClient
+The currently published SDK includes public client support for:
 
-client = UCIIClient(base_url="https://ucii.sportgen-ai.com")
+- identity creation, retrieval, and listing;
+- credential registration, retrieval, verification, revocation, and recovery;
+- verification status;
+- service-entitlement proof construction for supported economic-access flows;
+- synchronous and asynchronous HTTP transport;
+- public SDK error handling.
 
-status = client.verification.status()
-print(status)
-
-client.close()
-```
-
-Async usage is available through `AsyncUCIIClient`.
+Additional UCII capabilities may exist behind the public API, but they are not part of this repository unless and until they pass a separate publication and competitive-IP review.
 
 ## Public boundary
 
-This repository contains the sanctioned public SDK surface only. It does not contain the UCII server implementation, private custody material, controller secrets, production infrastructure, fleet internals, or other private UCII implementation details.
+This repository contains sanctioned public interoperability code only. It does not contain the UCII server implementation, private custody material, controller secrets, production infrastructure, databases, autonomous fleet internals, Mission Control internals, private operational policy, or private enforcement logic.
 
 Applications integrate with UCII through the public API boundary rather than importing private server code.
-
-## Capability domains
-
-The SDK exposes public client and contract surfaces for:
-
-- identities;
-- credentials and credential verification;
-- authentication compatibility flows;
-- authorization checks and execution;
-- delegated-authority checks, grants, and revocation;
-- verification status;
-- x402 discovery, pricing, and settlement information;
-- service-entitlement proofs as an alternative economic-access mechanism where applicable;
-- participant context and provider-neutral signing boundaries;
-- peer authentication and peer-trust contracts;
-- provenance events;
-- agent policy and adoption-state contracts.
 
 ## Authority separation
 
 UCII intentionally separates identity, credential verification, authority, economic access, and execution.
 
-A verified identity does not automatically possess action authority. Payment or service entitlement does not create controller or execution authority. Local policy may further restrict behavior but cannot expand authority granted by UCII.
+A verified identity does not automatically possess action authority. Payment or service entitlement does not create controller or execution authority. Public SDK interfaces may present evidence or requests to UCII, but authoritative trust and enforcement decisions remain inside the private UCII service.
+
+## Base URL
+
+Provide the UCII base URL supplied for the environment you are integrating with:
+
+```python
+from ucii import UCIIClient
+
+client = UCIIClient(base_url="https://<your-ucii-endpoint>")
+```
+
+The public repository intentionally does not treat any deployment hostname as authoritative unless that endpoint has been explicitly approved for public documentation.
 
 ## Python
 

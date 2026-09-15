@@ -49,7 +49,6 @@ EXPECTED_ROOT_EXPORTS = {
 
 WITHHELD_CLIENT_NAMESPACES = {
     "auth",
-    "authorization",
     "policy",
     "peer_auth",
     "peer_trust",

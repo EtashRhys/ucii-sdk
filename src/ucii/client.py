@@ -7,6 +7,10 @@ adoption, and provenance machinery is not part of this client surface.
 
 from __future__ import annotations
 
+from .authorization import (
+    AsyncAuthorizationNamespace,
+    AuthorizationNamespace,
+)
 from ._transport import AsyncHTTPTransport, HTTPTransport
 from .credentials import AsyncCredentialsNamespace, CredentialsNamespace
 from .identity import AsyncIdentityNamespace, IdentityNamespace
@@ -35,6 +39,7 @@ class UCIIClient:
         )
 
         self.identity = IdentityNamespace(self._transport)
+        self.authorization = AuthorizationNamespace(self._transport)
         self.credentials = CredentialsNamespace(self._transport)
         self.verification = VerificationNamespace(self._transport)
         self.x402 = X402Namespace(self._transport)
@@ -71,6 +76,7 @@ class AsyncUCIIClient:
         )
 
         self.identity = AsyncIdentityNamespace(self._transport)
+        self.authorization = AsyncAuthorizationNamespace(self._transport)
         self.credentials = AsyncCredentialsNamespace(self._transport)
         self.verification = AsyncVerificationNamespace(self._transport)
         self.x402 = AsyncX402Namespace(self._transport)

@@ -34,7 +34,6 @@ public contract. They must not be copied here merely because UCII internally
 uses them or the public SDK interoperates with related service capabilities:
 
 - `auth.py`;
-- `authorization.py`;
 - `policy.py`;
 - `peer_auth.py`;
 - `peer_trust.py`;
@@ -57,7 +56,7 @@ uses them or the public SDK interoperates with related service capabilities:
 - Service entitlement exposes only the public proof format and explicitly does not create controller, authorization, revocation, or execution authority.
 - Provenance is not part of the current public SDK surface.
 - x402 exposes read-only public service discovery/metadata and pricing only; settlement projections, receipt history, verification, replay protection, adapters, and settlement enforcement machinery remain outside the public SDK.
-- Authorization and delegated-authority SDK machinery are not part of the current public SDK surface; related server-side authority evaluation and enforcement remain private.
+- Authorization is exposed only as the non-executing `client.authorization.check()` public boundary. Execution, delegated-authority management, policy, permission derivation, and related server-side authority evaluation and enforcement machinery remain private.
 
 ## Publication rule
 

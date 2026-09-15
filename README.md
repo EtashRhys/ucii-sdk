@@ -17,6 +17,7 @@ The currently published SDK includes public client support for:
 - identity creation, retrieval, and listing;
 - credential registration, retrieval, verification, revocation, and recovery;
 - verification status;
+- non-executing authorization checks through `client.authorization.check()`;
 - x402 service discovery/metadata and pricing through `client.x402.info()` and `client.x402.pricing()`;
 - service-entitlement proof construction for supported economic-access flows;
 - synchronous and asynchronous HTTP transport;
@@ -35,6 +36,8 @@ Applications integrate with UCII through the public API boundary rather than imp
 UCII intentionally separates identity, credential verification, authority, economic access, and execution.
 
 A verified identity does not automatically possess action authority. Payment or service entitlement does not create controller or execution authority. Public SDK interfaces may present evidence or requests to UCII, but authoritative trust and enforcement decisions remain inside the private UCII service.
+
+Applications can submit a non-executing authorization question through `client.authorization.check(...)`. The SDK sends the authenticated identity, credential fingerprint, operation, signed message, and signature to the authoritative UCII service and returns its response. This public boundary evaluates authorization only; it does not expose execution, delegated-authority management, policy, or permission machinery.
 
 ## Base URL
 

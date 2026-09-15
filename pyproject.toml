@@ -3,7 +3,7 @@ name = "ucii-sdk"
 version = "1.0.0"
 description = "Universal Cryptographic Identity Infrastructure Python SDK"
 readme = "README.md"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.28,<1",

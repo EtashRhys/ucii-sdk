@@ -11,6 +11,7 @@ from ._transport import AsyncHTTPTransport, HTTPTransport
 from .credentials import AsyncCredentialsNamespace, CredentialsNamespace
 from .identity import AsyncIdentityNamespace, IdentityNamespace
 from .verification import AsyncVerificationNamespace, VerificationNamespace
+from .x402 import AsyncX402Namespace, X402Namespace
 
 
 class UCIIClient:
@@ -36,6 +37,7 @@ class UCIIClient:
         self.identity = IdentityNamespace(self._transport)
         self.credentials = CredentialsNamespace(self._transport)
         self.verification = VerificationNamespace(self._transport)
+        self.x402 = X402Namespace(self._transport)
 
     def close(self) -> None:
         """Close the underlying HTTP transport."""
@@ -71,6 +73,7 @@ class AsyncUCIIClient:
         self.identity = AsyncIdentityNamespace(self._transport)
         self.credentials = AsyncCredentialsNamespace(self._transport)
         self.verification = AsyncVerificationNamespace(self._transport)
+        self.x402 = AsyncX402Namespace(self._transport)
 
     async def close(self) -> None:
         """Close the underlying HTTP transport."""

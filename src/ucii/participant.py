@@ -23,7 +23,7 @@ class ParticipantContext:
     SigningProvider.
 
     Operating policy, authentication secrets, payment authority, lifecycle
-authority, and fleet membership are intentionally outside this object.
+    authority, and fleet membership are intentionally outside this object.
     """
 
     identity_id: str

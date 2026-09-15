@@ -17,6 +17,7 @@ The currently published SDK includes public client support for:
 - identity creation, retrieval, and listing;
 - credential registration, retrieval, verification, revocation, and recovery;
 - verification status;
+- x402 service discovery/metadata and pricing through `client.x402.info()` and `client.x402.pricing()`;
 - service-entitlement proof construction for supported economic-access flows;
 - synchronous and asynchronous HTTP transport;
 - public SDK error handling.
@@ -44,6 +45,15 @@ from ucii import UCIIClient
 
 client = UCIIClient(base_url="https://<your-ucii-endpoint>")
 ```
+
+Read x402 service metadata or pricing through the same client:
+
+```python
+info = client.x402.info()
+pricing = client.x402.pricing()
+```
+
+The public SDK intentionally does not expose settlement history, receipt verification, settlement adapters, or private settlement enforcement machinery.
 
 The public repository intentionally does not treat any deployment hostname as authoritative unless that endpoint has been explicitly approved for public documentation.
 

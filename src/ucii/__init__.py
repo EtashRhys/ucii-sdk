@@ -5,6 +5,7 @@ Private UCII trust, authority, enforcement, fleet, adoption, and provenance
 implementation details are intentionally outside this package surface.
 """
 
+from .client import AsyncUCIIClient, UCIIClient
 from .errors import (
     UCIIAPIError,
     UCIIAuthenticationError,
@@ -30,12 +31,14 @@ from .service_entitlement import (
 from .signing import SigningProvider
 
 __all__ = [
+    "AsyncUCIIClient",
     "ENTITLEMENT_PROOF_VERSION",
     "EntitlementProof",
     "EntitlementProofChallenge",
     "ParticipantContext",
     "SigningProvider",
     "UCIIAPIError",
+    "UCIIClient",
     "UCIIAuthenticationError",
     "UCIIAuthorizationError",
     "UCIIConfigurationError",
